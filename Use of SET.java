@@ -38,8 +38,3 @@ isPanagram(input);
 /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
 }
 
-
-
-import java.io.*;
-import java.util.*;
-
