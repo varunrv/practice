@@ -1,4 +1,4 @@
-import java.io.*;
+/*import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
 public class hash 
