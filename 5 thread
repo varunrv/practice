@@ -1,0 +1,90 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package five;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+
+public class Five{
+    public static void main(String args[]) {
+        BufferedReader reader1 = null;
+        BufferedReader reader2 = null;
+      
+        ArrayList<Thread> threads = new ArrayList<Thread>();
+        try {
+            reader1 = new BufferedReader(new FileReader(
+                    "build/aa.txt"));
+            
+            reader2 = new BufferedReader(new FileReader(
+                    "build/aaa.txt"));
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        }
+        
+            Runnable task1 = new ReadFile(reader1);
+            Runnable task2 = new ReadFile(reader2);
+            
+            Thread worker1 = new Thread(task1);
+            Thread worker2 = new Thread(task2);
+            // We can set the name of the thread
+           
+            
+            // Start the thread, never call method run() direct
+            worker1.start();
+            worker2.start();
+            // Remember the thread for later usage
+            threads.add(worker1);
+            threads.add(worker2);
+            
+        }
+    }
+    
+    
+    /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package five;
+
+/**
+ *
+ * @author dell pc
+ */
+import java.io.BufferedReader;
+import java.io.IOException;
+
+public class ReadFile implements Runnable {
+    BufferedReader bReader = null;
+
+    ReadFile(BufferedReader reader) {
+        this.bReader = reader;
+    }
+
+    public synchronized void run() {
+        String line;
+        try {
+            while ((line = bReader.readLine()) != null) {
+
+                try {
+                    System.out.println(line);
+                } catch (Exception e) {
+
+                }
+            }
+        } catch (IOException e) {
+            
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+
